@@ -22,7 +22,7 @@ def writeText(text, rectangle):
     epd.displayPartBaseImage(epd.getbuffer(text_image))
     epd.init(epd.PART_UPDATE)
     text_draw.rectangle(tuple(rectangle), fill=255)
-    text_draw.text(rectangle[0:1], text, font=font24, fill=0)
+    text_draw.text(tuple(rectangle[0:1]), text, font=font24, fill=0)
     epd.displayPartial(epd.getbuffer(text_image))
 
 logging.basicConfig(level=logging.DEBUG)
