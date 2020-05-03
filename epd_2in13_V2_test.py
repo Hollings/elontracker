@@ -15,7 +15,7 @@ from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 def writeText(text, rectangle):
-    text = '\n'.join(textwrap.wrap(18, 64))
+    text = '\n'.join(textwrap.wrap(text, 18))
 
     # # partial update
     logging.info("Writing Text")
