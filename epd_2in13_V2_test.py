@@ -3,6 +3,12 @@
 import sys
 import os
 import textwrap
+import requests
+import json
+import twitter
+f = open("conf.json","r")
+config = json.loads(f.read());
+
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
 libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
@@ -31,6 +37,12 @@ def writeText(text, rectangle, font):
 
 logging.basicConfig(level=logging.DEBUG)
 testTweet = """@elonmusk Anyone think they can get a good multiplayer Minecraft working on Teslas? Or maybe create a game that interacts virtually with reality like Pokémon Go while driving safely? Like a complex version of Pac-man or Mario Kart?"""
+api = twitter.Api(config['consumer_key'],
+                  config['consumer_secret'],
+                  config['access_token_key'],
+                  config['access_token_secret']
+                  )
+
 try:
     logging.info("epd2in13_V2 Demo")
     
@@ -47,8 +59,6 @@ try:
     writeText("15%", [200,50,200,122], moneyFont)
     logging.info("Goto Sleep...")
     epd.sleep()
-
-
 
 except IOError as e:
     logging.info(e)
