@@ -25,8 +25,8 @@ try:
 
     logging.info("Loading Font")
     # Drawing on the image
-    font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
-    font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
+    font15 = ImageFont.truetype('Font.ttc', 15)
+    font24 = ImageFont.truetype('Font.ttc', 24)
 
     # # partial update
     logging.info("Writing Text")
