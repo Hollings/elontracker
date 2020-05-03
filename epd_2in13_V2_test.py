@@ -22,13 +22,14 @@ try:
     logging.info("init and Clear")
     epd.init(epd.FULL_UPDATE)
     epd.Clear(0xFF)
-    
+
+    logging.info("Loading Font")
     # Drawing on the image
     font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
 
     # # partial update
-    logging.info("4.show time...")
+    logging.info("Writing Text")
     time_image = Image.new('1', (epd.height, epd.width), 255)
     text_draw = ImageDraw.Draw(time_image)
 
