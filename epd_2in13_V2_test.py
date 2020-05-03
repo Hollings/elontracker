@@ -18,15 +18,19 @@ def writeText(text, rectangle):
     logging.info("Writing Text")
     text_image = Image.new('1', (epd.height, epd.width), 255)
     text_draw = ImageDraw.Draw(text_image)
-    epd.init(epd.FULL_UPDATE)
+    # epd.init(epd.FULL_UPDATE)
     epd.displayPartBaseImage(epd.getbuffer(text_image))
     epd.init(epd.PART_UPDATE)
+    text_draw.rectangle(tuple(rectangle), fill=0)
     text_draw.rectangle(tuple(rectangle), fill=255)
     text_draw.text(tuple(rectangle[0:2]), text, font=font24, fill=0)
     epd.displayPartial(epd.getbuffer(text_image))
 
 logging.basicConfig(level=logging.DEBUG)
-
+testTweet = """@elonmusk Anyone
+think
+they 
+can get a good multiplayer Minecraft working on Teslas? Or maybe create a game that interacts virtually with reality like Pokémon Go while driving safely? Like a complex version of Pac-man or Mario Kart?"""
 try:
     logging.info("epd2in13_V2 Demo")
     
@@ -41,7 +45,8 @@ try:
     font24 = ImageFont.truetype('Font.ttc', 24)
 
     writeText("Test", [120, 80, 220, 105])
-
+    writeText("YaYa", [120,80,220,105])
+    writeText(testTweet, [0,0,250,60])
     logging.info("Goto Sleep...")
     epd.sleep()
 
