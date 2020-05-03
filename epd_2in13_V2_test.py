@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import sys
 import os
+import textwrap
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
 libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
@@ -14,6 +15,8 @@ from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 def writeText(text, rectangle):
+    text = '\n'.join(textwrap.wrap(18, 64))
+
     # # partial update
     logging.info("Writing Text")
     text_image = Image.new('1', (epd.height, epd.width), 255)
@@ -27,10 +30,7 @@ def writeText(text, rectangle):
     epd.displayPartial(epd.getbuffer(text_image))
 
 logging.basicConfig(level=logging.DEBUG)
-testTweet = """@elonmusk Anyone
-think
-they 
-can get a good multiplayer Minecraft working on Teslas? Or maybe create a game that interacts virtually with reality like Pokémon Go while driving safely? Like a complex version of Pac-man or Mario Kart?"""
+testTweet = """@elonmusk Anyone think they can get a good multiplayer Minecraft working on Teslas? Or maybe create a game that interacts virtually with reality like Pokémon Go while driving safely? Like a complex version of Pac-man or Mario Kart?"""
 try:
     logging.info("epd2in13_V2 Demo")
     
