@@ -14,8 +14,8 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 
-def writeText(text, rectangle):
-    text = '\n'.join(textwrap.wrap(text, 18))
+def writeText(text, rectangle, font):
+    text = '\n'.join(textwrap.wrap(text, 32))
 
     # # partial update
     logging.info("Writing Text")
@@ -26,7 +26,7 @@ def writeText(text, rectangle):
     epd.init(epd.PART_UPDATE)
     text_draw.rectangle(tuple(rectangle), fill=0)
     text_draw.rectangle(tuple(rectangle), fill=255)
-    text_draw.text(tuple(rectangle[0:2]), text, font=font24, fill=0)
+    text_draw.text(tuple(rectangle[0:2]), text, font=font, fill=0)
     epd.displayPartial(epd.getbuffer(text_image))
 
 logging.basicConfig(level=logging.DEBUG)
@@ -41,12 +41,10 @@ try:
 
     logging.info("Loading Font")
     # Drawing on the image
-    font15 = ImageFont.truetype('Font.ttc', 15)
-    font24 = ImageFont.truetype('Font.ttc', 24)
-
-    writeText("Test", [120, 80, 220, 105])
-    writeText("YaYa", [120,80,220,105])
-    writeText(testTweet, [0,0,250,60])
+    tweetFont = ImageFont.truetype('Font.ttc', 12)
+    moneyFont = ImageFont.truetype('Font.ttc', 20)
+    writeText(testTweet, [0,0,200,122], tweetFont)
+    writeText("15%", [200,50,200,122], moneyFont)
     logging.info("Goto Sleep...")
     epd.sleep()
 
