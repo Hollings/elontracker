@@ -13,6 +13,18 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 
+def writeText(text, rectangle):
+    # # partial update
+    logging.info("Writing Text")
+    text_image = Image.new('1', (epd.height, epd.width), 255)
+    text_draw = ImageDraw.Draw(text_image)
+    epd.init(epd.FULL_UPDATE)
+    epd.displayPartBaseImage(epd.getbuffer(text_image))
+    epd.init(epd.PART_UPDATE)
+    text_draw.rectangle(rectangle, fill=255)
+    text_draw.text(rectangle[0:1], 'Hello there', font=font24, fill=0)
+    epd.displayPartial(epd.getbuffer(text_image))
+
 logging.basicConfig(level=logging.DEBUG)
 
 try:
@@ -28,23 +40,13 @@ try:
     font15 = ImageFont.truetype('Font.ttc', 15)
     font24 = ImageFont.truetype('Font.ttc', 24)
 
-    # # partial update
-    logging.info("Writing Text")
-    time_image = Image.new('1', (epd.height, epd.width), 255)
-    text_draw = ImageDraw.Draw(time_image)
-
-    epd.init(epd.FULL_UPDATE)
-    epd.displayPartBaseImage(epd.getbuffer(time_image))
-
-    epd.init(epd.PART_UPDATE)
-    num = 0
-    text_draw.rectangle((120, 80, 220, 105), fill = 255)
-    text_draw.text((120, 80), 'Hello there', font = font24, fill = 0)
-    epd.displayPartial(epd.getbuffer(time_image))
+    writeText([120, 80, 220, 105])
 
     logging.info("Goto Sleep...")
     epd.sleep()
-        
+
+
+
 except IOError as e:
     logging.info(e)
     
