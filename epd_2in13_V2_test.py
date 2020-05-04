@@ -42,7 +42,7 @@ api = twitter.Api(config['consumer_key'],
                   config['access_token_key'],
                   config['access_token_secret']
                   )
-
+tweet = api.GetUser(screen_name='elonmusk').status.text
 try:
     logging.info("epd2in13_V2 Demo")
     
